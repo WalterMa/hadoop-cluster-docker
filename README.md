@@ -18,7 +18,7 @@ sudo docker pull kiwenlau/hadoop:1.0
 ##### 2. clone github repository
 
 ```
-git clone https://github.com/kiwenlau/hadoop-cluster-docker
+git clone https://github.com/WalterMa/hadoop-cluster-docker.git
 ```
 
 ##### 3. create hadoop network
