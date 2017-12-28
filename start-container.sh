@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# the default node number is 3
-N=${1:-3}
+# the default node number is 5
+N=${1:-5}
 
 
 # start hadoop master container
@@ -15,9 +15,10 @@ sudo docker run -itd \
                 -p 9001:9001 \
                 -p 8032:8032 \
                 -p 10020:10020 \
+                -p 14000:14000 \
                 --name hadoop-master \
                 --hostname hadoop-master \
-                kiwenlau/hadoop:1.0 &> /dev/null
+                wentaoma/hadoop:2.7.2 &> /dev/null
 
 
 # start hadoop slave container
@@ -30,7 +31,7 @@ do
 	                --net=hadoop \
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
-	                kiwenlau/hadoop:1.0 &> /dev/null
+	                wentaoma/hadoop:2.7.2 &> /dev/null
 	i=$(( $i + 1 ))
 done 
 
