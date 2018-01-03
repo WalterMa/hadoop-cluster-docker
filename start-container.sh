@@ -16,6 +16,7 @@ sudo docker run -itd \
                 -p 8032:8032 \
                 -p 10020:10020 \
                 -p 14000:14000 \
+                --storage-opt size=10G \
                 --name hadoop-master \
                 --hostname hadoop-master \
                 wentaoma/hadoop:2.7.2 &> /dev/null
@@ -29,6 +30,7 @@ do
 	echo "start hadoop-slave$i container..."
 	sudo docker run -itd \
 	                --net=hadoop \
+                        --storage-opt size=10G \
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 	                wentaoma/hadoop:2.7.2 &> /dev/null

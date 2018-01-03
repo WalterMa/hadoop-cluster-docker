@@ -7,12 +7,25 @@
 ![alt tag](https://raw.githubusercontent.com/kiwenlau/hadoop-cluster-docker/master/hadoop-cluster-docker.png)
 
 
-### 3 Nodes Hadoop Cluster
+### Prerequisites
+
+Need docker be installed and configured to use [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/) diver first
+
+https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/
+
+Device Mapper driver is used to limit each container storge size, if you just want to try this repo, you can comment these lines in start-container.sh:
+
+```
+--storage-opt size=10G
+```
+
+
+### 5 Nodes Hadoop Cluster
 
 ##### 1. pull docker image
 
 ```
-sudo docker pull kiwenlau/hadoop:1.0
+sudo docker pull wentaoma/hadoop:2.7.2
 ```
 
 ##### 2. clone github repository
@@ -40,9 +53,11 @@ sudo ./start-container.sh
 start hadoop-master container...
 start hadoop-slave1 container...
 start hadoop-slave2 container...
+start hadoop-slave3 container...
+start hadoop-slave4 container...
 root@hadoop-master:~# 
 ```
-- start 3 containers with 1 master and 2 slaves
+- start 3 containers with 1 master and 4 slaves
 - you will get into the /root directory of hadoop-master container
 
 ##### 5. start hadoop
@@ -50,6 +65,8 @@ root@hadoop-master:~#
 ```
 ./start-hadoop.sh
 ```
+
+- start hadoop services include httpfs
 
 ##### 6. run wordcount
 
@@ -81,7 +98,7 @@ do 1~3 like section A
 ##### 2. rebuild docker image
 
 ```
-sudo ./resize-cluster.sh 5
+sudo ./resize-cluster.sh 3
 ```
 - specify parameter > 1: 2, 3..
 - this script just rebuild hadoop image with different **slaves** file, which pecifies the name of all slave nodes
@@ -90,7 +107,7 @@ sudo ./resize-cluster.sh 5
 ##### 3. start container
 
 ```
-sudo ./start-container.sh 5
+sudo ./start-container.sh 3
 ```
 - use the same parameter as the step 2
 
@@ -98,3 +115,8 @@ sudo ./start-container.sh 5
 
 do 5~6 like section A
 
+
+### How to connect to remote hadoop and commit job in Intellij ?
+
+Please see this repo: 
+https://github.com/WalterMa/hadoop-intellj-example
