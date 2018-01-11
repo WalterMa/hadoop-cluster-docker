@@ -12,6 +12,10 @@
     </property>
     <property>
         <name>dfs.replication</name>
-        <value>2</value>
+        <value>3</value>
+    </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>32m</value>
     </property>
 </configuration>
